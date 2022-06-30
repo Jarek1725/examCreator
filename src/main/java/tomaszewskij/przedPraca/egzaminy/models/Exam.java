@@ -1,31 +1,31 @@
 package tomaszewskij.przedPraca.egzaminy.models;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 
-@Entity(name = "Exam")
-@Table(name = "exam")
+//@Entity(name = "Exam")
+//@Table(name = "exam")
 public class Exam {
-    @Id
-    @SequenceGenerator(
-            name = "exam_sequence",
-            sequenceName = "exam_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "exam_sequence"
-    )
-    @Column(
-            name = "id",
-            updatable = false
-    )
+//    @Id
+//    @SequenceGenerator(
+//            name = "exam_sequence",
+//            sequenceName = "exam_sequence",
+//            allocationSize = 1
+//    )
+//    @GeneratedValue(
+//            strategy = GenerationType.SEQUENCE,
+//            generator = "exam_sequence"
+//    )
+//    @Column(
+//            name = "id",
+//            updatable = false
+//    )
     private Long id;
 
-    @Column(
-            name = "title",
-            nullable = false,
-            updatable = false
-    )
+//    @Column(
+//            name = "title",
+//            nullable = false,
+//            updatable = false
+//    )
     private String title;
 
     public Exam() {
