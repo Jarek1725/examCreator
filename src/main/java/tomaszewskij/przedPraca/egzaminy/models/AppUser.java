@@ -23,15 +23,25 @@ public class AppUser {
     private Long id;
 
     @Column(
-            name = "first_name"
+            name = "private_token",
+            updatable = false
     )
-    private String firstName;
+    private String privateToken;
 
     @Column(
-            name = "last_name"
+            name = "public_token",
+            updatable = false
     )
+    private String publicToken;
 
-    private String lastName;
+
+    public AppUser() {
+    }
+
+    public AppUser(String privateToken, String publicToken) {
+        this.privateToken = privateToken;
+        this.publicToken = publicToken;
+    }
 
     public Long getId() {
         return id;
@@ -39,13 +49,5 @@ public class AppUser {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 }
