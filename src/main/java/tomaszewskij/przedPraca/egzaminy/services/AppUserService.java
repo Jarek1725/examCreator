@@ -2,6 +2,7 @@ package tomaszewskij.przedPraca.egzaminy.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 import tomaszewskij.przedPraca.egzaminy.models.AppUser;
 import tomaszewskij.przedPraca.egzaminy.repositories.AppUserRepository;
 
@@ -28,18 +29,12 @@ public class AppUserService {
         return privateToken;
     }
 
+
     String generateRandomString(int limitNumber) {
         return new Random().ints(48, 126)
                 .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
                 .limit(limitNumber)
                 .mapToObj(value -> String.valueOf((char)value).toUpperCase())
                 .collect(Collectors.joining(""));
-
-
-//        String generatedString = random.ints(leftLimit, rightLimit + 1)
-//                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-//                .limit(targetStringLength)
-//                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-//                .toString();
     }
 }
