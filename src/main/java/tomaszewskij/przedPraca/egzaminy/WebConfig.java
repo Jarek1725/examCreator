@@ -10,9 +10,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry
-                .addMapping("/**").allowedOrigins("https://examcreator.herokuapp.com").allowedMethods("GET", "POST", "OPTIONS", "PUT", "OPTIONS").allowedHeaders("Content-Type",
-                        "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", "x-csrf-token")
-                .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials").allowCredentials(true).maxAge(3600);
+                .addMapping("/**").allowedOrigins("https://examcreator.herokuapp.com").allowedMethods("*").allowedHeaders("*")
+                .exposedHeaders("*").allowCredentials(true).maxAge(3600);
     }
 
 }
