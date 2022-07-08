@@ -28,6 +28,7 @@ public class AppUserController {
         Cookie cookie = new Cookie("cookieName", "cookieValue");
         cookie.setMaxAge(7 * 24 * 60 * 60);
 
+        cookie.setS
         cookie.setSecure(true);
         cookie.setHttpOnly(true);
 
