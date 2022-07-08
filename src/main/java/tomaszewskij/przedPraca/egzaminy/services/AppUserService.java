@@ -2,14 +2,12 @@ package tomaszewskij.przedPraca.egzaminy.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 import tomaszewskij.przedPraca.egzaminy.models.AppUser;
 import tomaszewskij.przedPraca.egzaminy.repositories.AppUserRepository;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.Locale;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 public class AppUserService {
@@ -21,7 +19,7 @@ public class AppUserService {
         this.appUserRepository = appUserRepository;
     }
 
-    public String createAppUser(){
+    public String createAppUser() {
         String privateToken = generateRandomString(12);
         String publicToken = generateRandomString(6);
 
@@ -30,15 +28,18 @@ public class AppUserService {
         return privateToken;
     }
 
-    String generateRandomString(int limitNumber){
-        int leftLimit = 48;
-        int rightLimit = 122;
-
-        return new Random().ints(leftLimit, rightLimit + 1)
+    String generateRandomString(int limitNumber) {
+        return new Random().ints(48, 126)
                 .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
                 .limit(limitNumber)
-                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                .toString()
-                .toUpperCase();
+                .mapToObj(value -> String.valueOf((char)value).toUpperCase())
+                .collect(Collectors.joining(""));
+
+
+//        String generatedString = random.ints(leftLimit, rightLimit + 1)
+//                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+//                .limit(targetStringLength)
+//                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+//                .toString();
     }
 }

@@ -1,6 +1,8 @@
 package tomaszewskij.przedPraca.egzaminy.models;
 
 import javax.persistence.*;
+import java.sql.Date;
+
 //
 @Entity(name = "AppUser")
 @Table(name = "app_user")
@@ -33,6 +35,12 @@ public class AppUser {
             updatable = false
     )
     private String publicToken;
+
+    @Column(
+            name="create_account",
+            updatable = false
+    )
+    private Date createdAccount;
 
 
     public AppUser() {
