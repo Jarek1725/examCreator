@@ -1,12 +1,17 @@
 package tomaszewskij.przedPraca.egzaminy.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 
-//
 @Entity(name = "AppUser")
 @Table(name = "app_user")
 public class AppUser {
+
+    @JsonIgnore
     @Id
     @SequenceGenerator(
             name = "app_user_sequence",
@@ -21,7 +26,6 @@ public class AppUser {
             name = "id",
             updatable = false
     )
-
     private Long id;
 
     @Column(
@@ -40,7 +44,7 @@ public class AppUser {
             name="create_account",
             updatable = false
     )
-    private Date createdAccount;
+    private Date createDate;
 
 
     public AppUser() {

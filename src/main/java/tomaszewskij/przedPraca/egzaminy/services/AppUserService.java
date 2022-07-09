@@ -20,6 +20,7 @@ public class AppUserService {
         this.appUserRepository = appUserRepository;
     }
 
+
     public String createAppUser() {
         String privateToken = generateRandomString(12);
         String publicToken = generateRandomString(6);
@@ -34,7 +35,13 @@ public class AppUserService {
         return new Random().ints(48, 126)
                 .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
                 .limit(limitNumber)
-                .mapToObj(value -> String.valueOf((char)value).toUpperCase())
+                .mapToObj(value -> String.valueOf((char) value).toUpperCase())
                 .collect(Collectors.joining(""));
     }
+
+
+    public AppUser getAppUser(String privateToken) {
+        return null;
+    }
+
 }
