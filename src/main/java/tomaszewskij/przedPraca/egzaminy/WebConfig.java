@@ -7,22 +7,22 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Configuration
+//@Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Value("${env}")
-    private String env;
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry
-                .addMapping("/**").allowedOrigins(System.getenv("env")).allowedMethods("*").allowedHeaders("*")
-                .exposedHeaders("*").allowCredentials(true).maxAge(604800);
-    }
-
-    @Bean
-    public CookieSameSiteSupplier applicationCookieSameSiteSupplier() {
-        return CookieSameSiteSupplier.ofNone();
-    }
+//    @Value("${env}")
+//    private String env;
+//
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry
+//                .addMapping("/**").allowedOrigins(System.getenv("env")).allowedMethods("*").allowedHeaders("*")
+//                .exposedHeaders("*").allowCredentials(true).maxAge(604800);
+//    }
+//
+//    @Bean
+//    public CookieSameSiteSupplier applicationCookieSameSiteSupplier() {
+//        return CookieSameSiteSupplier.ofNone();
+//    }
 
 }

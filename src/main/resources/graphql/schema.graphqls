@@ -1,0 +1,24 @@
+type Query{
+    getAllAppUser: [AppUser]
+    login(privateToken:String):AppUser
+}
+
+type Mutation{
+    createAppUser:String
+    createExam(examTitle:String, appUserPrivateToken:String):Boolean
+}
+
+
+
+type AppUser{
+    id:ID
+    publicToken:String
+    privateToken:String
+    exams:[Exam]
+}
+
+type Exam{
+    id:ID
+    title:String
+    creator:AppUser
+}

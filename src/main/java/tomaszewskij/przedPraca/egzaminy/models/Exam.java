@@ -28,26 +28,18 @@ public class Exam {
     )
     private String title;
 
-    @Column(
-            name = "test",
-            nullable = false,
-            updatable = false
+    @ManyToOne
+    @JoinColumn(
+            name = "exam_creator_id"
     )
-    private String test;
+    private AppUser creator;
 
     public Exam() {
     }
 
+
     public Exam(String title) {
         this.title = title;
-    }
-
-    public String getTest() {
-        return test;
-    }
-
-    public void setTest(String test) {
-        this.test = test;
     }
 
     public Long getId() {
@@ -64,5 +56,13 @@ public class Exam {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public AppUser getCreator() {
+        return creator;
+    }
+
+    public void setCreator(AppUser creator) {
+        this.creator = creator;
     }
 }

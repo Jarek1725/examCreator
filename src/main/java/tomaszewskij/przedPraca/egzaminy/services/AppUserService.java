@@ -2,13 +2,14 @@ package tomaszewskij.przedPraca.egzaminy.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
+import tomaszewskij.przedPraca.egzaminy.ReturnOlnyPublicData;
+import tomaszewskij.przedPraca.egzaminy.exceptions.NotFoundException;
 import tomaszewskij.przedPraca.egzaminy.models.AppUser;
 import tomaszewskij.przedPraca.egzaminy.repositories.AppUserRepository;
 
+import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Service
 public class AppUserService {
@@ -30,6 +31,21 @@ public class AppUserService {
         return privateToken;
     }
 
+    public AppUser getAppUserByPrivateToken(String privateToken) {
+        return appUserRepository.findAppUserByPrivateToken(privateToken).orElseThrow(
+                () -> new NotFoundException("User with private token: " + privateToken + " not found")
+        );
+    }
+
+    public List<AppUser> getAllAppUsers() {
+        return appUserRepository.findAll().stream().map(ReturnOlnyPublicData::returnOnlyPublicAppUserData).toList();
+    }
+
+    public AppUser login(String privateToken) {
+        AppUser appUser = appUserRepository.selectAppUserByPrivateTokenForLogin(privateToken).orElseThrow(() -> new NotFoundException("User not found"));
+        return appUser;
+    }
+
 
     String generateRandomString(int limitNumber) {
         return new Random().ints(48, 126)
@@ -38,10 +54,4 @@ public class AppUserService {
                 .mapToObj(value -> String.valueOf((char) value).toUpperCase())
                 .collect(Collectors.joining(""));
     }
-
-
-    public AppUser getAppUser(String privateToken) {
-        return null;
-    }
-
 }
