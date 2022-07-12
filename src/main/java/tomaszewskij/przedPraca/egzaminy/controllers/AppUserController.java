@@ -64,7 +64,6 @@ public class AppUserController {
 
     @QueryMapping
     public List<AppUser> getAllAppUser() {
-
         return appUserService.getAllAppUsers();
     }
 }
