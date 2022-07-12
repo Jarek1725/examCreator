@@ -1,6 +1,8 @@
 package tomaszewskij.przedPraca.egzaminy.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "Exam")
 @Table(name = "exam")
@@ -33,6 +35,12 @@ public class Exam {
             name = "exam_creator_id"
     )
     private AppUser creator;
+
+    @OneToMany(mappedBy = "exam")
+    private List<Question> questions = new ArrayList<>();
+
+
+
 
     public Exam() {
     }
