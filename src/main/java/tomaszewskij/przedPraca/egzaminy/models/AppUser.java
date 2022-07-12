@@ -16,8 +16,6 @@ import java.util.List;
 @Entity(name = "AppUser")
 @Table(name = "app_user")
 public class AppUser {
-
-    @JsonIgnore
     @Id
     @SequenceGenerator(
             name = "app_user_sequence",
