@@ -32,12 +32,16 @@ public class Exam {
     private List<Question> questions = new ArrayList<>();
 
 
-    @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL)
-    private List<ExamCategory> examCategories = new ArrayList<>();
+    @OneToMany(
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            mappedBy = "exam"
+    )
+    private List<ExamCategory> categories = new ArrayList<>();
 
 
     public Exam() {
     }
+
 
     public List<Question> getQuestions() {
         return questions;
@@ -47,6 +51,11 @@ public class Exam {
         this.questions = questions;
     }
 
+    public Exam(String title, AppUser creator, List<Question> questions) {
+        this.title = title;
+        this.creator = creator;
+        this.questions = questions;
+    }
 
     public Exam(String title) {
         this.title = title;
@@ -74,5 +83,29 @@ public class Exam {
 
     public void setCreator(AppUser creator) {
         this.creator = creator;
+    }
+
+    public List<ExamCategory> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<ExamCategory> categories) {
+        this.categories = categories;
+    }
+
+    public void addCategory(ExamCategory examCategory) {
+        System.out.println("CATEGORY ADDED");
+        this.categories.add(examCategory);
+    }
+
+    @Override
+    public String toString() {
+        return "Exam{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", creator=" + creator +
+                ", questions=" + questions +
+                ", categories=" + categories +
+                '}';
     }
 }

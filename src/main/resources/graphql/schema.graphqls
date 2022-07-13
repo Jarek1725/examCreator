@@ -21,4 +21,25 @@ type Exam{
     id:ID
     title:String
     creator:AppUser
+    questions:[Question]
+}
+
+type Category{
+    id:ID
+    value:String
+    exams:[Exam]
+}
+
+type Answer{
+    id:ID
+    value:String
+    question:Question
+    isCorrect:Boolean
+}
+
+type Question{
+    id:ID
+    value:String
+    answers:[Answer]
+    exam:Exam
 }

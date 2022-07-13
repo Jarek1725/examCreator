@@ -26,7 +26,7 @@ public class Answer {
     )
     private String value;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(
             name = "question_id"
     )
@@ -40,6 +40,8 @@ public class Answer {
     public Answer() {
     }
 
+
+
     public Long getId() {
         return id;
     }
@@ -50,6 +52,12 @@ public class Answer {
 
     public String getValue() {
         return value;
+    }
+
+    public Answer(String value, Question question, boolean isCorrect) {
+        this.value = value;
+        this.question = question;
+        this.isCorrect = isCorrect;
     }
 
     public void setValue(String value) {
