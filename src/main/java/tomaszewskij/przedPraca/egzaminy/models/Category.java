@@ -22,14 +22,14 @@ public class Category {
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             mappedBy = "category"
     )
-    private List<ExamCategory> categories = new ArrayList<>();
+    private List<ExamCategory> exams = new ArrayList<>();
 
     public Category() {
     }
 
-    public Category(String value, List<ExamCategory> categories) {
+    public Category(String value, List<ExamCategory> exams) {
         this.value = value;
-        this.categories = categories;
+        this.exams = exams;
     }
 
     public Category(String value) {
@@ -52,11 +52,15 @@ public class Category {
         this.value = value;
     }
 
-    public List<ExamCategory> getCategories() {
-        return categories;
+    public void addExam(ExamCategory examCategory){
+        this.exams.add(examCategory);
     }
 
-    public void setCategories(List<ExamCategory> categories) {
-        this.categories = categories;
+    public List<Exam> getExams() {
+        return this.exams.stream().map(ExamCategory::getExam).toList();
+    }
+
+    public void setExams(List<ExamCategory> exams) {
+        this.exams = exams;
     }
 }

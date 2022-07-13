@@ -40,7 +40,10 @@ public class Answer {
     public Answer() {
     }
 
-
+    public Answer(String value, boolean isCorrect) {
+        this.value = value;
+        this.isCorrect = isCorrect;
+    }
 
     public Long getId() {
         return id;

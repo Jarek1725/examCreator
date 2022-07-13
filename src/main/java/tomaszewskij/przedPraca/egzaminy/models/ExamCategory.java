@@ -10,7 +10,6 @@ public class ExamCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @ManyToOne
     @JoinColumn(
             name = "exam_id",

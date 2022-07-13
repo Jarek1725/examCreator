@@ -26,24 +26,26 @@ public class EgzaminyApplication {
 	){
 		return args->{
 
-			AppUser appUser = new AppUser("privateTokenTest", "publicTokenTest");
-			Category category = new Category("Category name");
-			Question question = new Question("Question value");
-			Exam exam = new Exam("Title", appUser, List.of(question));
+//			System.out.println(examRepository.findById(9L).orElseThrow(()->new NotFoundException("nn")).getQuestions());
+
+//			AppUser appUser = new AppUser("privateTokenTest", "publicTokenTest");
+//			Category category = new Category("Category name");
+//			Question question = new Question("Question value");
+//			Exam exam = new Exam("Title", appUser, List.of(question));
 
 
-			exam.addCategory(new ExamCategory(exam, category));
-			question.setExam(exam);
+//			exam.addCategory(new ExamCategory(exam, category));
+//			question.setExam(exam);
 
 
-			categoryRepository.save(category);
-			appUserRepository.save(appUser);
-			questionRepository.save(question);
-			examRepository.save(exam);
-
-			Answer answer = new Answer("Answer value", questionRepository.findById(1L).orElseThrow(()->new NotFoundException(("YYY"))), false);
-
-			answerRepository.save(answer);
+//			categoryRepository.save(category);
+//			appUserRepository.save(appUser);
+//			questionRepository.save(question);
+//			examRepository.save(exam);
+//
+//			Answer answer = new Answer("Answer value", questionRepository.findById(1L).orElseThrow(()->new NotFoundException(("YYY"))), false);
+//
+//			answerRepository.save(answer);
 
 
 		};

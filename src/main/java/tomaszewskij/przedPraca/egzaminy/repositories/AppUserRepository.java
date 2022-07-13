@@ -3,7 +3,6 @@ package tomaszewskij.przedPraca.egzaminy.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import tomaszewskij.przedPraca.egzaminy.DTO.PublicAppUserData;
 import tomaszewskij.przedPraca.egzaminy.models.AppUser;
 
 import java.util.Optional;

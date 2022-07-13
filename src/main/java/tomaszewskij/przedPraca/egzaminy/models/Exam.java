@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Entity(name = "Exam")
@@ -16,6 +17,8 @@ public class Exam {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "public_id")
+    private String publicId;
 
     @Column(
             name = "title",
@@ -38,10 +41,20 @@ public class Exam {
     )
     private List<ExamCategory> categories = new ArrayList<>();
 
+    @Column(name = "color_value")
+    private int colorValue;
+
 
     public Exam() {
     }
 
+    public String getPublicId() {
+        return publicId;
+    }
+
+    public void setPublicId(String publicId) {
+        this.publicId = publicId;
+    }
 
     public List<Question> getQuestions() {
         return questions;
@@ -85,8 +98,8 @@ public class Exam {
         this.creator = creator;
     }
 
-    public List<ExamCategory> getCategories() {
-        return categories;
+    public List<Category> getCategories() {
+        return this.categories.stream().map(ExamCategory::getCategory).toList();
     }
 
     public void setCategories(List<ExamCategory> categories) {
@@ -94,8 +107,15 @@ public class Exam {
     }
 
     public void addCategory(ExamCategory examCategory) {
-        System.out.println("CATEGORY ADDED");
         this.categories.add(examCategory);
+    }
+
+    public int getColorValue() {
+        return colorValue;
+    }
+
+    public void setColorValue(int colorValue) {
+        this.colorValue = colorValue;
     }
 
     @Override

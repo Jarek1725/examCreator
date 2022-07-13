@@ -1,12 +1,6 @@
 package tomaszewskij.przedPraca.egzaminy.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.annotations.Fetch;
-import tomaszewskij.przedPraca.egzaminy.DTO.PublicAppUserData;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +47,10 @@ public class AppUser {
     @OneToMany(
             mappedBy = "creator"
     )
-    private List<Exam> exams = new ArrayList<>();
+        private List<Exam> exams = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<ExamAttempts> examAttempts = new ArrayList<>();
 
 
 
@@ -110,4 +107,18 @@ public class AppUser {
     public void setExams(List<Exam> exams) {
         this.exams = exams;
     }
+
+    public List<ExamAttempts> getExamAttempts() {
+        return examAttempts;
+    }
+
+    public void setExamAttempts(List<ExamAttempts> examAttempts) {
+        this.examAttempts = examAttempts;
+    }
+
+    public void addAttempt(ExamAttempts examAttempts){
+        this.examAttempts.add(examAttempts);
+    }
+
+
 }

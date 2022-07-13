@@ -1,13 +1,15 @@
 type Query{
     getAllAppUser: [AppUser]
+    getExam(examId:Int):Exam
     login(privateToken:String):AppUser
 }
 
 type Mutation{
     createAppUser:String
-    createExam(examTitle:String, appUserPrivateToken:String):Boolean
+    createExam(examTitle:String, appUserPrivateToken:String, categories:[String]):Boolean
+    createCategory(categoryName:String):Boolean
+    addQuestionToExam(question:QuestionInput):Boolean
 }
-
 
 
 type AppUser{
@@ -22,12 +24,20 @@ type Exam{
     title:String
     creator:AppUser
     questions:[Question]
+    categories:[Category]
+    colorValue:Int
 }
 
 type Category{
     id:ID
     value:String
-    exams:[Exam]
+    examCategory:[ExamCategory]
+}
+
+type ExamCategory{
+    id:ID
+    exam:Exam
+    category:Category
 }
 
 type Answer{
@@ -37,9 +47,21 @@ type Answer{
     isCorrect:Boolean
 }
 
+input AnswerInput{
+    value:String
+    questionId:Int
+    isCorrect:Boolean
+}
+
 type Question{
     id:ID
     value:String
     answers:[Answer]
     exam:Exam
+}
+
+input QuestionInput{
+    value:String
+    examId:Int
+    answers:[AnswerInput]
 }

@@ -79,4 +79,8 @@ public class Question {
     public void setExam(Exam exam) {
         this.exam = exam;
     }
+
+    public void addAnswer(Answer answer){
+        this.answers.add(answer);
+    }
 }
