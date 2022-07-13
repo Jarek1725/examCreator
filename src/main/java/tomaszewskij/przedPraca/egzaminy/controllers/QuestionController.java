@@ -19,14 +19,13 @@ public class QuestionController {
 
     private final QuestionService questionService;
 
-    @Autowired
     public QuestionController(QuestionService questionService) {
         this.questionService = questionService;
     }
 
 
     @MutationMapping
-    public boolean addQuestionToExam(@Argument QuestionInput question) throws JSONException {
+    public boolean addQuestionToExam(@Argument QuestionInput question){
 
         System.out.println(question.getValue());
         System.out.println(question.getExamId());

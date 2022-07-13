@@ -23,7 +23,6 @@ public class ExamController {
 
     private final ExamService examService;
 
-    @Autowired
     public ExamController(ExamService examService) {
         this.examService = examService;
     }
