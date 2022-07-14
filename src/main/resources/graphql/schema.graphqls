@@ -15,7 +15,6 @@ type Mutation{
 type AppUser{
     id:ID
     publicToken:String
-    privateToken:String
     exams:[Exam]
 }
 
@@ -26,6 +25,9 @@ type Exam{
     questions:[Question]
     categories:[Category]
     colorValue:Int
+    attempts:[ExamAttempts]
+    averageScore:Float
+    maxPoints:Int
 }
 
 type Category{
@@ -60,8 +62,16 @@ type Question{
     exam:Exam
 }
 
+type ExamAttempts{
+    id:ID
+    score:Int
+    user:AppUser
+    exam:Exam
+}
+
 input QuestionInput{
     value:String
     examId:Int
     answers:[AnswerInput]
+    points:Int
 }

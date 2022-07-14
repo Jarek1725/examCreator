@@ -34,15 +34,24 @@ public class Exam {
     @OneToMany(mappedBy = "exam")
     private List<Question> questions = new ArrayList<>();
 
-
     @OneToMany(
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             mappedBy = "exam"
     )
     private List<ExamCategory> categories = new ArrayList<>();
 
     @Column(name = "color_value")
     private int colorValue;
+
+    @OneToMany(
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            mappedBy = "exam"
+    )
+    private List<ExamAttempts> attempts = new ArrayList<>();
+
+    private double averageScore;
+
+    private Long maxPoints;
 
 
     public Exam() {
@@ -69,6 +78,7 @@ public class Exam {
         this.creator = creator;
         this.questions = questions;
     }
+
 
     public Exam(String title) {
         this.title = title;
@@ -116,6 +126,30 @@ public class Exam {
 
     public void setColorValue(int colorValue) {
         this.colorValue = colorValue;
+    }
+
+    public List<ExamAttempts> getAttempts() {
+        return attempts;
+    }
+
+    public void setAttempts(List<ExamAttempts> attempts) {
+        this.attempts = attempts;
+    }
+
+    public double getAverageScore() {
+        return attempts.stream().mapToDouble(ExamAttempts::getScore).average().orElse(0);
+    }
+
+    public void setAverageScore(double averageScore) {
+        this.averageScore = averageScore;
+    }
+
+    public Long getMaxPoints() {
+        return questions.stream().mapToLong(Question::getPoints).sum();
+    }
+
+    public void setMaxPoints(Long maxPoints) {
+        this.maxPoints = maxPoints;
     }
 
     @Override

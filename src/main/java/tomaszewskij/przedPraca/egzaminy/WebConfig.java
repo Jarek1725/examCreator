@@ -10,9 +10,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-//    @Value("${env}")
-//    private String env;
-
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry

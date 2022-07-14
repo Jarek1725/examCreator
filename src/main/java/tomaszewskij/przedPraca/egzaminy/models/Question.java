@@ -43,6 +43,12 @@ public class Question {
     )
     private Exam exam;
 
+    @Column(name = "isHidden")
+    private Boolean isHidden;
+
+    @Column(name = "poinst")
+    private Long points;
+
     public Question() {
     }
 
@@ -78,6 +84,27 @@ public class Question {
 
     public void setExam(Exam exam) {
         this.exam = exam;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Boolean isHidden() {
+        return isHidden;
+    }
+
+    public void setHidden(Boolean hidden) {
+        isHidden = hidden;
+    }
+
+    public Long getPoints() {
+        System.out.println(points);
+        return points;
+    }
+
+    public void setPoints(Long points) {
+        this.points = points;
     }
 
     public void addAnswer(Answer answer){
