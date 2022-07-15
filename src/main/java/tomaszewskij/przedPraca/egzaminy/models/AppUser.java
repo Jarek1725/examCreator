@@ -6,24 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 @Entity(name = "AppUser")
 @Table(name = "app_user")
 public class AppUser {
     @Id
-    @SequenceGenerator(
-            name = "app_user_sequence",
-            sequenceName = "app_user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "app_user_sequence"
-    )
-    @Column(
-            name = "id",
-            updatable = false
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(
@@ -39,20 +26,22 @@ public class AppUser {
     private String publicToken;
 
     @Column(
-            name="create_account",
+            name = "create_account",
             updatable = false
     )
     private Date createDate;
 
     @OneToMany(
-            mappedBy = "creator"
+            mappedBy = "creator",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE}
     )
-        private List<Exam> exams = new ArrayList<>();
+    private List<Exam> exams = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<ExamAttempts> examAttempts = new ArrayList<>();
 
-
+    @OneToMany(mappedBy = "appUser", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<ExamRating> examRatings = new ArrayList<>();
 
     public AppUser() {
     }
@@ -116,7 +105,7 @@ public class AppUser {
         this.examAttempts = examAttempts;
     }
 
-    public void addAttempt(ExamAttempts examAttempts){
+    public void addAttempt(ExamAttempts examAttempts) {
         this.examAttempts.add(examAttempts);
     }
 

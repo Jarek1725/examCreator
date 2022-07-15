@@ -1,6 +1,8 @@
 package tomaszewskij.przedPraca.egzaminy.models;
 
 
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,19 +11,7 @@ import java.util.List;
 @Table(name = "question")
 public class Question {
     @Id
-    @SequenceGenerator(
-            name = "question_sequence",
-            sequenceName = "question_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "question_sequence"
-    )
-    @Column(
-            name = "id",
-            updatable = false
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(
@@ -44,7 +34,7 @@ public class Question {
     private Exam exam;
 
     @Column(name = "isHidden")
-    private Boolean isHidden;
+    private Boolean isHidden = false;
 
     @Column(name = "poinst")
     private Long points;

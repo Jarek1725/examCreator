@@ -33,10 +33,20 @@ public class ExamController {
         return true;
     }
 
+    @MutationMapping
+    public boolean addExamRating(@Argument double value, @Argument String privateToken, @Argument Long examId){
+        examService.addExamRating(value, privateToken, examId);
+        return true;
+    }
+
     @QueryMapping
     public Exam getExam(@Argument Long examId){
         return examService.getById(examId);
     }
 
+    @QueryMapping
+    public List<Exam> getExams(){
+        return examService.getExams();
+    }
 
 }

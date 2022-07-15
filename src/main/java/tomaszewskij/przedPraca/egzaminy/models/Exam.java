@@ -3,6 +3,7 @@ package tomaszewskij.przedPraca.egzaminy.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -48,6 +49,13 @@ public class Exam {
             mappedBy = "exam"
     )
     private List<ExamAttempts> attempts = new ArrayList<>();
+
+    @Column(name = "create_date")
+    private LocalDate createDate = LocalDate.now();
+
+    @OneToMany(mappedBy = "exam", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<ExamRating> examRatings = new ArrayList<>();
+
 
     private double averageScore;
 
@@ -150,6 +158,26 @@ public class Exam {
 
     public void setMaxPoints(Long maxPoints) {
         this.maxPoints = maxPoints;
+    }
+
+    public LocalDate getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDate createDate) {
+        this.createDate = createDate;
+    }
+
+    public List<ExamRating> getExamRatings() {
+        return examRatings;
+    }
+
+    public void setExamRatings(List<ExamRating> examRatings) {
+        this.examRatings = examRatings;
+    }
+
+    public void addExamRating(ExamRating examRating){
+        this.examRatings.add(examRating);
     }
 
     @Override

@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import tomaszewskij.przedPraca.egzaminy.exceptions.NotFoundException;
-import tomaszewskij.przedPraca.egzaminy.models.Category;
-import tomaszewskij.przedPraca.egzaminy.models.Exam;
-import tomaszewskij.przedPraca.egzaminy.models.ExamCategory;
+import tomaszewskij.przedPraca.egzaminy.models.*;
 import tomaszewskij.przedPraca.egzaminy.repositories.ExamRepository;
 
 import java.util.List;
@@ -56,5 +54,18 @@ public class ExamService {
                 .limit(limitNumber)
                 .mapToObj(value -> String.valueOf((char) value).toUpperCase())
                 .collect(Collectors.joining(""));
+    }
+
+    public List<Exam> getExams() {
+        return examRepository.findAll();
+    }
+
+    public void addExamRating(double value, String privateToken, Long examId) {
+        Exam exam = examRepository.findById(examId).orElseThrow(()->new NotFoundException("Exam with id: "+examId+", not found", ""));
+        AppUser appUser = appUserService.getAppUserByPrivateToken(privateToken);
+
+        exam.addExamRating(new ExamRating(appUser, exam, value));
+
+        examRepository.save(exam);
     }
 }

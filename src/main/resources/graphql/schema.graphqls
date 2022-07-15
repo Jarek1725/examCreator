@@ -1,6 +1,7 @@
 type Query{
-    getAllAppUser: [AppUser]
+    getAppUsers: [AppUser]
     getExam(examId:Int):Exam
+    getExams:[Exam]
     login(privateToken:String):AppUser
 }
 
@@ -9,6 +10,7 @@ type Mutation{
     createExam(examTitle:String, appUserPrivateToken:String, categories:[String]):Boolean
     createCategory(categoryName:String):Boolean
     addQuestionToExam(question:QuestionInput):Boolean
+    addExamRating(value:Float, privateToken:String, examId:Int):Boolean
 }
 
 
@@ -28,6 +30,8 @@ type Exam{
     attempts:[ExamAttempts]
     averageScore:Float
     maxPoints:Int
+    createDate:String
+    examRatings:[ExamRating]
 }
 
 type Category{
@@ -60,6 +64,14 @@ type Question{
     value:String
     answers:[Answer]
     exam:Exam
+    isHidden:Boolean
+}
+
+type ExamRating{
+    id:ID
+    appUser:AppUser
+    exam:Exam
+    value:Int
 }
 
 type ExamAttempts{
