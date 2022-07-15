@@ -32,7 +32,7 @@ public class ExamService {
     public void createExam(String examTitle, String appUserPrivateToken, List<String> categories) {
         Exam entity = new Exam(examTitle);
         List<Category> categoriesEntities = categories.stream().map(categoryService::findByNameOrCreateNew).toList();
-        entity.setPublicId(generateRandomString(7));
+        entity.setPublicId(generateRandomString());
         entity.setCreator(appUserService.getAppUserByPrivateToken(appUserPrivateToken));
         entity.setColorValue(ThreadLocalRandom.current().nextInt(0, 6));
         categoriesEntities.forEach(category -> {
@@ -48,11 +48,11 @@ public class ExamService {
                 .orElseThrow(() -> new NotFoundException("Not found", "User"));
     }
 
-    String generateRandomString(int limitNumber) {
-        return new Random().ints(48, 126)
-                .filter(i -> (i <= 48 || i >= 57) && (i <= 65 || i >= 90))
-                .limit(limitNumber)
-                .mapToObj(value -> String.valueOf((char) value).toUpperCase())
+    String generateRandomString() {
+        return new Random().ints(48, 91)
+                .filter(i -> (i >= 48 && i <= 57) || (i >= 65 && i <= 91))
+                .limit(6)
+                .mapToObj(value -> String.valueOf((char) value))
                 .collect(Collectors.joining(""));
     }
 
