@@ -1,6 +1,8 @@
 package tomaszewskij.przedPraca.egzaminy.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -51,6 +53,7 @@ public class Exam {
     private List<ExamAttempts> attempts = new ArrayList<>();
 
     @Column(name = "create_date")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate createDate = LocalDate.now();
 
     @OneToMany(mappedBy = "exam", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -60,6 +63,8 @@ public class Exam {
     private double averageScore;
 
     private Long maxPoints;
+
+    private double averageExamRating;
 
 
     public Exam() {
@@ -145,7 +150,13 @@ public class Exam {
     }
 
     public double getAverageScore() {
-        return attempts.stream().mapToDouble(ExamAttempts::getScore).average().orElse(0);
+//        return attempts.stream().mapToDouble(ExamAttempts::getScore).average().orElse(0);
+        double averageScore = attempts.stream().mapToDouble(ExamAttempts::getScore).average().orElse(0);
+        long maxPoints = questions.stream().mapToLong(Question::getPoints).sum();
+        if (maxPoints == 0) {
+            maxPoints = 1;
+        }
+        return Math.round((averageScore / maxPoints) * 100 * 100.0) / 100.0;
     }
 
     public void setAverageScore(double averageScore) {
@@ -176,8 +187,16 @@ public class Exam {
         this.examRatings = examRatings;
     }
 
-    public void addExamRating(ExamRating examRating){
+    public double getAverageExamRating() {
+        return examRatings.stream().mapToDouble(ExamRating::getValue).average().orElse(0);
+    }
+
+    public void addExamRating(ExamRating examRating) {
         this.examRatings.add(examRating);
+    }
+
+    public void addExamAttempt(ExamAttempts examAttempts) {
+        this.attempts.add(examAttempts);
     }
 
     @Override

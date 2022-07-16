@@ -34,8 +34,14 @@ public class ExamController {
     }
 
     @MutationMapping
-    public boolean addExamRating(@Argument double value, @Argument String privateToken, @Argument Long examId){
-        examService.addExamRating(value, privateToken, examId);
+    public boolean addExamRating(@Argument double value, @Argument String appUserPrivateToken, @Argument Long examId){
+        examService.addExamRating(value, appUserPrivateToken, examId);
+        return true;
+    }
+
+    @MutationMapping
+    public boolean addExamAttempt(@Argument int value, @Argument String appUserPrivateToken, @Argument Long examId){
+        examService.addExamAttempt(value, appUserPrivateToken, examId);
         return true;
     }
 

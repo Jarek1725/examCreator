@@ -33,7 +33,7 @@ public class AppUserService {
 
     public AppUser getAppUserByPrivateToken(String privateToken) {
         return appUserRepository.findAppUserByPrivateToken(privateToken).orElseThrow(
-                ()->new NotFoundException("Not found", "User")
+                () -> new NotFoundException("Not found", "User")
         );
     }
 
@@ -42,7 +42,7 @@ public class AppUserService {
     }
 
     public AppUser login(String privateToken) {
-        AppUser appUser = appUserRepository.selectAppUserByPrivateTokenForLogin(privateToken).orElseThrow(                ()->new NotFoundException("Not found", "User"));
+        AppUser appUser = appUserRepository.selectAppUserByPrivateTokenForLogin(privateToken).orElseThrow(() -> new NotFoundException("Not found", "User"));
         return appUser;
     }
 

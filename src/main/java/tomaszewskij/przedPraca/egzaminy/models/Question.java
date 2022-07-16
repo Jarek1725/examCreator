@@ -36,7 +36,7 @@ public class Question {
     @Column(name = "isHidden")
     private Boolean isHidden = false;
 
-    @Column(name = "poinst")
+    @Column(name = "points")
     private Long points;
 
     public Question() {
@@ -89,8 +89,11 @@ public class Question {
     }
 
     public Long getPoints() {
-        System.out.println(points);
         return points;
+    }
+
+    public Boolean getHidden() {
+        return isHidden;
     }
 
     public void setPoints(Long points) {

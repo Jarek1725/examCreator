@@ -60,11 +60,21 @@ public class ExamService {
         return examRepository.findAll();
     }
 
-    public void addExamRating(double value, String privateToken, Long examId) {
+    public void addExamRating(double value, String appUserPrivateToken, Long examId) {
+        Exam exam = examRepository.findById(examId).orElseThrow(()->new NotFoundException("Exam with id: "+examId+", not found", ""));
+        AppUser appUser = appUserService.getAppUserByPrivateToken(appUserPrivateToken);
+
+        exam.addExamRating(new ExamRating(appUser, exam, value));
+
+        examRepository.save(exam);
+    }
+
+
+    public void addExamAttempt(int score, String privateToken, Long examId) {
         Exam exam = examRepository.findById(examId).orElseThrow(()->new NotFoundException("Exam with id: "+examId+", not found", ""));
         AppUser appUser = appUserService.getAppUserByPrivateToken(privateToken);
 
-        exam.addExamRating(new ExamRating(appUser, exam, value));
+        exam.addExamAttempt(new ExamAttempts(score, appUser, exam));
 
         examRepository.save(exam);
     }

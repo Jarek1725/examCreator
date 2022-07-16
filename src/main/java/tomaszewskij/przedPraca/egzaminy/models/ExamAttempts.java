@@ -26,6 +26,12 @@ public class ExamAttempts {
     public ExamAttempts() {
     }
 
+    public ExamAttempts(int score, AppUser user, Exam exam) {
+        this.score = score;
+        this.user = user;
+        this.exam = exam;
+    }
+
     public Long getId() {
         return id;
     }
