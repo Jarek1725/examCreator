@@ -59,6 +59,9 @@ public class Exam {
     @OneToMany(mappedBy = "exam", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<ExamRating> examRatings = new ArrayList<>();
 
+    @OneToMany(mappedBy = "exam", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<ExamUniversity> universities = new ArrayList<>();
+
 
     private double averageScore;
 
@@ -197,6 +200,14 @@ public class Exam {
 
     public void addExamAttempt(ExamAttempts examAttempts) {
         this.attempts.add(examAttempts);
+    }
+
+    public List<ExamUniversity> getUniversities() {
+        return universities;
+    }
+
+    public void setUniversities(List<ExamUniversity> universities) {
+        this.universities = universities;
     }
 
     @Override
