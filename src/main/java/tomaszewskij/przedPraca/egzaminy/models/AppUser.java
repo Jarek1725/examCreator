@@ -2,6 +2,7 @@ package tomaszewskij.przedPraca.egzaminy.models;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +42,8 @@ public class AppUser {
             name = "create_account",
             updatable = false
     )
-    private Date createDate;
+    private LocalDate createDate = LocalDate.now();
+
 
     @OneToMany(
             mappedBy = "creator",
@@ -93,12 +95,20 @@ public class AppUser {
         this.publicToken = publicToken;
     }
 
-    public Date getCreateDate() {
+    public LocalDate getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
+    }
+
+    public List<ExamRating> getExamRatings() {
+        return examRatings;
+    }
+
+    public void setExamRatings(List<ExamRating> examRatings) {
+        this.examRatings = examRatings;
     }
 
     public List<Exam> getExams() {

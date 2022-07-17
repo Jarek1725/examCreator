@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import tomaszewskij.przedPraca.egzaminy.DTO.ExamAttemptFilter;
 import tomaszewskij.przedPraca.egzaminy.models.Exam;
+import tomaszewskij.przedPraca.egzaminy.models.ExamAttempts;
 import tomaszewskij.przedPraca.egzaminy.services.ExamService;
 
 import java.util.List;
@@ -54,5 +56,7 @@ public class ExamController {
     public List<Exam> getExams(){
         return examService.getExams();
     }
+
+
 
 }

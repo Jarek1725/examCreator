@@ -1,8 +1,9 @@
 type Query{
+    login(privateToken:String):AppUser
     getAppUsers: [AppUser]
     getExam(examId:Int):Exam
     getExams:[Exam]
-    login(privateToken:String):AppUser
+    getExamAttempts(filter:ExamAttemptFilter):[ExamAttempts]
 }
 
 type Mutation{
@@ -35,6 +36,7 @@ type Exam{
     examRatings:[ExamRating]
     publicId:String
     averageExamRating:Float
+    university:University
 }
 
 type Category{
@@ -83,6 +85,7 @@ type ExamAttempts{
     score:Int
     user:AppUser
     exam:Exam
+    date:String
 }
 
 input QuestionInput{
@@ -90,4 +93,16 @@ input QuestionInput{
     examId:Int
     answers:[AnswerInput]
     points:Int
+}
+
+type University{
+    id:ID
+    exam:[Exam]
+    name:String
+    city:String
+}
+
+input ExamAttemptFilter{
+    publicToken:String
+    examId:Int
 }

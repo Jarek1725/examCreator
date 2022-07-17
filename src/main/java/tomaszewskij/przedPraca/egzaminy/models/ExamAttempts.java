@@ -1,6 +1,8 @@
 package tomaszewskij.przedPraca.egzaminy.models;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity(name = "ExamAttempts")
 @Table(name = "exam_attempts")
@@ -22,6 +24,11 @@ public class ExamAttempts {
     @ManyToOne
     @JoinColumn(name = "exam_id")
     private Exam exam;
+
+    @Column(name = "date")
+    private LocalDate createDate = LocalDate.now();
+
+
 
     public ExamAttempts() {
     }
@@ -62,5 +69,13 @@ public class ExamAttempts {
 
     public void setExam(Exam exam) {
         this.exam = exam;
+    }
+
+    public LocalDate getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDate createDate) {
+        this.createDate = createDate;
     }
 }
