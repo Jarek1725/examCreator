@@ -21,7 +21,7 @@ public class ExamAttemptController {
     }
 
     @QueryMapping
-    public List<ExamAttempts> getExamAttempts(@Argument ExamAttemptFilter filter){
+    public List<ExamAttempts> examAttempts(@Argument ExamAttemptFilter filter){
         return examAttemptService.getExams(filter);
     }
 }

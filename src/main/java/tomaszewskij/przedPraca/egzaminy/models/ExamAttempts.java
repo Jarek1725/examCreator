@@ -78,4 +78,6 @@ public class ExamAttempts {
     public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
     }
+
+
 }

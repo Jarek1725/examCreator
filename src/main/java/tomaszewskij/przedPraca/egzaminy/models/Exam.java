@@ -62,6 +62,8 @@ public class Exam {
     @OneToMany(mappedBy = "exam", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<ExamUniversity> universities = new ArrayList<>();
 
+    @Column(name = "percent_to_pass")
+    private Double percentToPass;
 
     private double averageScore;
 
@@ -208,6 +210,14 @@ public class Exam {
 
     public void setUniversities(List<ExamUniversity> universities) {
         this.universities = universities;
+    }
+
+    public Double getPercentToPass() {
+        return percentToPass;
+    }
+
+    public void setPercentToPass(Double percentToPass) {
+        this.percentToPass = percentToPass;
     }
 
     @Override

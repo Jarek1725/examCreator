@@ -1,9 +1,9 @@
 type Query{
     login(privateToken:String):AppUser
-    getAppUsers: [AppUser]
-    getExam(examId:Int):Exam
-    getExams:[Exam]
-    getExamAttempts(filter:ExamAttemptFilter):[ExamAttempts]
+    appUsers: [AppUser]
+    exam(examId:Int):Exam
+    exams:[Exam]
+    examAttempts(filter:ExamAttemptFilter):[ExamAttempts]
 }
 
 type Mutation{
@@ -85,7 +85,7 @@ type ExamAttempts{
     score:Int
     user:AppUser
     exam:Exam
-    date:String
+    createDate:String
 }
 
 input QuestionInput{

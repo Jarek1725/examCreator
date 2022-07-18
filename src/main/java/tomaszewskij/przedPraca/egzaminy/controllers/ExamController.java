@@ -42,18 +42,18 @@ public class ExamController {
     }
 
     @MutationMapping
-    public boolean addExamAttempt(@Argument int value, @Argument String appUserPrivateToken, @Argument Long examId){
+    public boolean examAttempt(@Argument int value, @Argument String appUserPrivateToken, @Argument Long examId){
         examService.addExamAttempt(value, appUserPrivateToken, examId);
         return true;
     }
 
     @QueryMapping
-    public Exam getExam(@Argument Long examId){
+    public Exam exam(@Argument Long examId){
         return examService.getById(examId);
     }
 
     @QueryMapping
-    public List<Exam> getExams(){
+    public List<Exam> exams(){
         return examService.getExams();
     }
 
