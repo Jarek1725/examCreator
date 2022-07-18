@@ -37,6 +37,7 @@ type Exam{
     publicId:String
     averageExamRating:Float
     university:University
+    percentToPass:Float
 }
 
 type Category{
