@@ -2,7 +2,7 @@ type Query{
     login(privateToken:String):AppUser
     appUsers: [AppUser]
     exam(examId:Int):Exam
-    exams:[Exam]
+    exams(filter:ExamFilter, sortBy:String):[Exam]
     examAttempts(filter:ExamAttemptFilter):[ExamAttempts]
 }
 
@@ -106,4 +106,9 @@ type University{
 input ExamAttemptFilter{
     publicToken:String
     examId:Int
+}
+
+input ExamFilter{
+    school:String,
+    category:String
 }

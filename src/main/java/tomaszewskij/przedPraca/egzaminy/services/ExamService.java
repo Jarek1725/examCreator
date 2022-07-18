@@ -3,6 +3,7 @@ package tomaszewskij.przedPraca.egzaminy.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import tomaszewskij.przedPraca.egzaminy.DTO.ExamFilter;
 import tomaszewskij.przedPraca.egzaminy.exceptions.NotFoundException;
 import tomaszewskij.przedPraca.egzaminy.models.*;
 import tomaszewskij.przedPraca.egzaminy.repositories.ExamRepository;
@@ -56,12 +57,15 @@ public class ExamService {
                 .collect(Collectors.joining(""));
     }
 
-    public List<Exam> getExams() {
-        return examRepository.findAll();
+    public List<Exam> getExams(ExamFilter filter, String sortBy) {
+        System.out.println("TOTOT");
+        System.out.println(sortBy);
+        System.out.println(filter.getCategory());
+        return examRepository.findAllExamsFilterAndSorted(filter.getCategory(), filter.getSchool(), sortBy);
     }
 
     public void addExamRating(double value, String appUserPrivateToken, Long examId) {
-        Exam exam = examRepository.findById(examId).orElseThrow(()->new NotFoundException("Exam with id: "+examId+", not found", ""));
+        Exam exam = examRepository.findById(examId).orElseThrow(() -> new NotFoundException("Exam with id: " + examId + ", not found", ""));
         AppUser appUser = appUserService.getAppUserByPrivateToken(appUserPrivateToken);
 
         exam.addExamRating(new ExamRating(appUser, exam, value));
@@ -71,7 +75,7 @@ public class ExamService {
 
 
     public void addExamAttempt(int score, String privateToken, Long examId) {
-        Exam exam = examRepository.findById(examId).orElseThrow(()->new NotFoundException("Exam with id: "+examId+", not found", ""));
+        Exam exam = examRepository.findById(examId).orElseThrow(() -> new NotFoundException("Exam with id: " + examId + ", not found", ""));
         AppUser appUser = appUserService.getAppUserByPrivateToken(privateToken);
 
         exam.addExamAttempt(new ExamAttempts(score, appUser, exam));

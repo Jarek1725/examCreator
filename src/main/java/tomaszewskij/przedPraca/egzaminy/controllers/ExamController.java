@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tomaszewskij.przedPraca.egzaminy.DTO.ExamAttemptFilter;
+import tomaszewskij.przedPraca.egzaminy.DTO.ExamFilter;
 import tomaszewskij.przedPraca.egzaminy.models.Exam;
 import tomaszewskij.przedPraca.egzaminy.models.ExamAttempts;
 import tomaszewskij.przedPraca.egzaminy.services.ExamService;
@@ -53,8 +54,8 @@ public class ExamController {
     }
 
     @QueryMapping
-    public List<Exam> exams(){
-        return examService.getExams();
+    public List<Exam> exams(@Argument ExamFilter filter, @Argument String sortBy){
+        return examService.getExams(filter, sortBy);
     }
 
 
