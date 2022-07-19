@@ -8,6 +8,7 @@ import tomaszewskij.przedPraca.egzaminy.exceptions.NotFoundException;
 import tomaszewskij.przedPraca.egzaminy.models.*;
 import tomaszewskij.przedPraca.egzaminy.repositories.ExamRepository;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -58,10 +59,14 @@ public class ExamService {
     }
 
     public List<Exam> getExams(ExamFilter filter, String sortBy) {
-        System.out.println("TOTOT");
-        System.out.println(sortBy);
-        System.out.println(filter.getCategory());
-        return examRepository.findAllExamsFilterAndSorted(filter.getCategory(), filter.getSchool(), sortBy);
+        List<Exam> allExamsFilterAndSorted = examRepository.findAllExamsFilterAndSorted(filter.getCategory(), filter.getSchool(), sortBy);
+        if (sortBy != null) {
+            if (sortBy.equals("2") || sortBy.equals("3")) {
+                Collections.reverse(allExamsFilterAndSorted);
+                allExamsFilterAndSorted.forEach(System.out::println);
+            }
+        }
+        return allExamsFilterAndSorted;
     }
 
     public void addExamRating(double value, String appUserPrivateToken, Long examId) {

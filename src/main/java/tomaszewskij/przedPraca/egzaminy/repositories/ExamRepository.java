@@ -11,8 +11,8 @@ import java.util.List;
 @Repository
 public interface ExamRepository extends JpaRepository<Exam, Long> {
     @Query(value = "SELECT e FROM Exam as e " +
-            "JOIN e.categories as c " +
-            "JOIN e.universities as u " +
+            "LEFT JOIN e.categories as c " +
+            "LEFT JOIN e.universities as u " +
             "LEFT JOIN e.attempts as a " +
             "LEFT JOIN e.examRatings as r " +
             "WHERE c.category.value LIKE (CASE WHEN ?1 IS NULL THEN '%' ELSE CONCAT('%',?1,'%')  END) " +
