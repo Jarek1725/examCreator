@@ -1,7 +1,7 @@
 type Query{
     login(privateToken:String):AppUser
     appUsers: [AppUser]
-    exam(examId:Int):Exam
+    exam(examPublicId:String):Exam
     exams(filter:ExamFilter, sortBy:String):[Exam]
     examAttempts(filter:ExamAttemptFilter):[ExamAttempts]
 }

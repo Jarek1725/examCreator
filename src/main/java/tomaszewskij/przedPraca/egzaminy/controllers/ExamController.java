@@ -49,8 +49,8 @@ public class ExamController {
     }
 
     @QueryMapping
-    public Exam exam(@Argument Long examId){
-        return examService.getById(examId);
+    public Exam exam(@Argument String examPublicId){
+        return examService.getByPublicId(examPublicId);
     }
 
     @QueryMapping

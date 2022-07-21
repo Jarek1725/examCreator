@@ -43,6 +43,11 @@ public class ExamService {
         examRepository.save(entity);
     }
 
+    public Exam getByPublicId(String publicId) {
+        System.out.println("TOTO");
+        System.out.println(publicId);
+        return examRepository.findByPublicId(publicId).orElseThrow(() -> new NotFoundException("Not found", "User"));
+    }
 
     public Exam getById(Long examId) {
         return examRepository

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import tomaszewskij.przedPraca.egzaminy.models.Exam;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ExamRepository extends JpaRepository<Exam, Long> {
@@ -24,4 +25,6 @@ public interface ExamRepository extends JpaRepository<Exam, Long> {
             "ELSE e.id END)")
 
     List<Exam> findAllExamsFilterAndSorted(String category, String school, String sortBy);
+
+    Optional<Exam> findByPublicId(String publicId);
 }

@@ -65,6 +65,9 @@ public class Exam {
     @Column(name = "percent_to_pass")
     private Double percentToPass;
 
+    @Column(name = "how_much_questions_show")
+    private Integer howManyQuestionsShow;
+
     private double averageScore;
 
     private Long maxPoints;
@@ -218,6 +221,18 @@ public class Exam {
 
     public void setPercentToPass(Double percentToPass) {
         this.percentToPass = percentToPass;
+    }
+
+    public int getHowManyQuestionsShow() {
+        return howManyQuestionsShow;
+    }
+
+    public void setHowManyQuestionsShow(int howManyQuestionsShow) {
+        this.howManyQuestionsShow = howManyQuestionsShow;
+    }
+
+    public void setAverageExamRating(double averageExamRating) {
+        this.averageExamRating = averageExamRating;
     }
 
     @Override
