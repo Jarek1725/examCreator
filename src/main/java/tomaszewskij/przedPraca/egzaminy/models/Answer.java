@@ -1,6 +1,8 @@
 package tomaszewskij.przedPraca.egzaminy.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "Answer")
 @Table(name = "answer")
@@ -36,6 +38,9 @@ public class Answer {
             name = "is_correct"
     )
     private boolean isCorrect;
+
+    @OneToMany(mappedBy = "answer")
+    private List<AttemptAnswer> attemptAnswers = new ArrayList<>();
 
     public Answer() {
     }
@@ -81,5 +86,13 @@ public class Answer {
 
     public void setCorrect(boolean correct) {
         isCorrect = correct;
+    }
+
+    public List<AttemptAnswer> getAttemptAnswers() {
+        return attemptAnswers;
+    }
+
+    public void setAttemptAnswers(List<AttemptAnswer> attemptAnswers) {
+        this.attemptAnswers = attemptAnswers;
     }
 }
