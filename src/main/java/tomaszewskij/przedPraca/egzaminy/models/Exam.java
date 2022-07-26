@@ -224,7 +224,7 @@ public class Exam {
     }
 
     public int getHowManyQuestionsShow() {
-        return howManyQuestionsShow;
+        return howManyQuestionsShow == null ? 0 :howManyQuestionsShow;
     }
 
     public void setHowManyQuestionsShow(int howManyQuestionsShow) {

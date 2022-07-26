@@ -3,6 +3,8 @@ package tomaszewskij.przedPraca.egzaminy.models;
 import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "ExamAttempts")
 @Table(name = "exam_attempts")
@@ -28,6 +30,8 @@ public class ExamAttempts {
     @Column(name = "date")
     private LocalDate createDate = LocalDate.now();
 
+    @OneToMany(mappedBy = "examAttempts", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<AttemptQuestion> attemptQuestion = new ArrayList<>();
 
 
     public ExamAttempts() {
@@ -79,5 +83,15 @@ public class ExamAttempts {
         this.createDate = createDate;
     }
 
+    public List<AttemptQuestion> getAttemptQuestion() {
+        return attemptQuestion;
+    }
 
+    public void setAttemptQuestion(List<AttemptQuestion> attemptQuestion) {
+        this.attemptQuestion = attemptQuestion;
+    }
+
+    public void addAttemptQuestion(AttemptQuestion attemptQuestion){
+        this.attemptQuestion.add(attemptQuestion);
+    }
 }

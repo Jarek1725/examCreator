@@ -25,6 +25,15 @@ public class AttemptQuestion {
     public AttemptQuestion() {
     }
 
+    public AttemptQuestion(Question question) {
+        this.question = question;
+    }
+
+    public AttemptQuestion(ExamAttempts examAttempts, Question question) {
+        this.examAttempts = examAttempts;
+        this.question = question;
+    }
+
     public ExamAttempts getExamAttempts() {
         return examAttempts;
     }
