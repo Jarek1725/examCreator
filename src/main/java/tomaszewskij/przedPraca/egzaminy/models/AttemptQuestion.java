@@ -19,7 +19,7 @@ public class AttemptQuestion {
     @JoinColumn(name = "question_id")
     private Question question;
 
-    @OneToMany(mappedBy = "attemptQuestion")
+    @OneToMany(mappedBy = "attemptQuestion", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<AttemptAnswer> attemptAnswers = new ArrayList<>();
 
     public AttemptQuestion() {

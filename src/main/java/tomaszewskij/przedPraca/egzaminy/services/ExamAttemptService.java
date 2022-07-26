@@ -6,6 +6,7 @@ import tomaszewskij.przedPraca.egzaminy.DTO.ExamAttemptFilter;
 import tomaszewskij.przedPraca.egzaminy.DTO.SelectedAnswers;
 import tomaszewskij.przedPraca.egzaminy.exceptions.NotFoundException;
 import tomaszewskij.przedPraca.egzaminy.models.*;
+import tomaszewskij.przedPraca.egzaminy.repositories.AttemptAnswerRepository;
 import tomaszewskij.przedPraca.egzaminy.repositories.ExamAttemptRepository;
 
 import java.util.*;
@@ -18,15 +19,17 @@ public class ExamAttemptService {
     private final QuestionService questionService;
     private final AppUserService appUserService;
     private final AnswerService answerService;
+    private final AttemptAnswerRepository attemptAnswerRepository;
 
 
     @Autowired
-    public ExamAttemptService(ExamAttemptRepository examAttemptRepository, ExamService examService, QuestionService questionService, AppUserService appUserService, AnswerService answerService) {
+    public ExamAttemptService(ExamAttemptRepository examAttemptRepository, ExamService examService, QuestionService questionService, AppUserService appUserService, AnswerService answerService, AttemptAnswerRepository attemptAnswerRepository) {
         this.examAttemptRepository = examAttemptRepository;
         this.examService = examService;
         this.questionService = questionService;
         this.appUserService = appUserService;
         this.answerService = answerService;
+        this.attemptAnswerRepository = attemptAnswerRepository;
     }
 
     public List<ExamAttempts> getExams(ExamAttemptFilter filter) {
@@ -82,29 +85,37 @@ public class ExamAttemptService {
     public void endAttempt(List<SelectedAnswers> selectedAnswers, Long attemptId, String appUserPrivateToken) {
         Integer points = 0;
         ExamAttempts examAttempts = examAttemptRepository.findById(attemptId).orElseThrow(
-                ()->new NotFoundException("Not found attempt with id:"+attemptId, "Attempt"));
+                () -> new NotFoundException("Not found attempt with id:" + attemptId, "Attempt"));
 
-        examAttempts.getAttemptQuestion().forEach(e->{
-            System.out.println("ODPOWIEDZI");
-            e.getQuestion().getAnswers().forEach(System.out::println);
-        });
+        List<AttemptAnswer> attemptAnswers = new ArrayList<>();
+        List<Answer> questionAnswersList = new ArrayList<>();
 
-        for (SelectedAnswers selectedAnswer : selectedAnswers) {
-            Question question = questionService.findById(selectedAnswer.getQuestionId());
-
-            if (checkIfCorrectAnswers(question, selectedAnswer.getSelectedAnswersId())) {
-                points += question.getPoints();
+        for (AttemptQuestion attemptQuestion : examAttempts.getAttemptQuestion()) {
+            SelectedAnswers selectedAnswer = selectedAnswers.stream()
+                    .filter(e -> e.getQuestionId().equals(attemptQuestion.getQuestion().getId()))
+                    .findFirst().orElse(null);
+            if (selectedAnswer != null) {
+                for (Long answer : selectedAnswer.getSelectedAnswersId()) {
+                    Answer answerById = answerService.findById(answer);
+                    attemptAnswers.add(new AttemptAnswer(attemptQuestion, answerById));
+                    questionAnswersList.add(answerById);
+                }
+                if (checkIfCorrectAnswers(attemptQuestion.getQuestion(), questionAnswersList)) {
+                    points += attemptQuestion.getQuestion().getPoints();
+                }
+                attemptQuestion.setAttemptAnswers(attemptAnswers);
+                questionAnswersList = new ArrayList<>();
+                attemptAnswers = new ArrayList<>();
             }
         }
+
+        examAttempts.setScore(points);
+        examAttemptRepository.save(examAttempts);
+
     }
 
-    public boolean checkIfCorrectAnswers(Question question, List<Long> answersId) {
-        List<Answer> userAnswers = new ArrayList<>();
+    public boolean checkIfCorrectAnswers(Question question, List<Answer> userAnswers) {
         List<Answer> correctAnswers = question.getAnswers().stream().filter(Answer::isCorrect).collect(Collectors.toList());
-        answersId.forEach(answer -> {
-            Answer answerById = answerService.findById(answer);
-            userAnswers.add(answerById);
-        });
 
         userAnswers.sort(Comparator.comparing(Answer::getId));
 

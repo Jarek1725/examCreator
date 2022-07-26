@@ -20,6 +20,11 @@ public class AttemptAnswer {
     public AttemptAnswer() {
     }
 
+    public AttemptAnswer(AttemptQuestion attemptQuestion, Answer answer) {
+        this.attemptQuestion = attemptQuestion;
+        this.answer = answer;
+    }
+
     public Long getId() {
         return id;
     }
