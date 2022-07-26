@@ -8,19 +8,7 @@ import java.util.List;
 @Table(name = "answer")
 public class Answer {
     @Id
-    @SequenceGenerator(
-            name = "answer_sequence",
-            sequenceName = "answer_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "answer_sequence"
-    )
-    @Column(
-            name = "id",
-            updatable = false
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(

@@ -20,9 +20,9 @@ public class QuestionService {
     public void saveQuestion(QuestionInput questionInput) {
         Question question = new Question();
         question.setExam(examService.getById(questionInput.getExamId()));
-//        questionInput.getAnswers().forEach(answer->{
-//            question.addAnswer(new Answer(answer.getValue(), question, answer.isCorrect()));
-//        });
+        questionInput.getAnswers().forEach(answer->{
+            question.addAnswer(new Answer(answer.getValue(), question, answer.isCorrect()));
+        });
 
         question.setValue(questionInput.getValue());
         question.setPoints(questionInput.getPoints());
