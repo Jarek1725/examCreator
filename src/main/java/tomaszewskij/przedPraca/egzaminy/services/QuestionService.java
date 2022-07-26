@@ -2,6 +2,7 @@ package tomaszewskij.przedPraca.egzaminy.services;
 
 import org.springframework.stereotype.Service;
 import tomaszewskij.przedPraca.egzaminy.DTO.QuestionInput;
+import tomaszewskij.przedPraca.egzaminy.exceptions.NotFoundException;
 import tomaszewskij.przedPraca.egzaminy.models.Answer;
 import tomaszewskij.przedPraca.egzaminy.models.Question;
 import tomaszewskij.przedPraca.egzaminy.repositories.ExamRepository;
@@ -11,6 +12,10 @@ import tomaszewskij.przedPraca.egzaminy.repositories.QuestionRepository;
 public class QuestionService {
     private final QuestionRepository questionRepository;
     private final ExamService examService;
+
+    public Question findById(Long id){
+        return questionRepository.findById(id).orElseThrow(()->new NotFoundException("Not found question with id:"+id, "Question"));
+    }
 
     public QuestionService(QuestionRepository questionRepository, ExamService examService) {
         this.questionRepository = questionRepository;

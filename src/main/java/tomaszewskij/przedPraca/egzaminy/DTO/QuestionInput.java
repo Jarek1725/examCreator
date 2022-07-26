@@ -9,20 +9,20 @@ public class QuestionInput {
     private String value;
     private Long examId;
     private List<AnswerInput> answers = new ArrayList<>();
-    private Long points;
+    private Integer points;
 
-    public QuestionInput(String value, Long examId, List<AnswerInput> answers, Long points) {
+    public QuestionInput(String value, Long examId, List<AnswerInput> answers, Integer points) {
         this.value = value;
         this.examId = examId;
         this.answers = answers;
         this.points = points;
     }
 
-    public Long getPoints() {
+    public Integer getPoints() {
         return points;
     }
 
-    public void setPoints(Long points) {
+    public void setPoints(Integer points) {
         this.points = points;
     }
 

@@ -32,13 +32,13 @@ public class ExamAttemptController {
     @MutationMapping
     public List<Question> startAttempt(@Argument String examPublicId, @Argument String appUserPrivateToken){
         List<Question> questions = examAttemptService.startAttempt(examPublicId, appUserPrivateToken);
-
         return questions;
     }
 
     @MutationMapping
-    public ExamAttemptResult endAttempt(@Argument SelectedAnswers selectedAnswers, @Argument Long attemptId, @Argument String appUserPrivateToken){
+    public ExamAttemptResult endAttempt(@Argument List<SelectedAnswers> selectedAnswers, @Argument Long attemptId, @Argument String appUserPrivateToken){
         System.out.println(selectedAnswers);
+        examAttemptService.endAttempt(selectedAnswers, attemptId, appUserPrivateToken);
         return null;
     }
 }

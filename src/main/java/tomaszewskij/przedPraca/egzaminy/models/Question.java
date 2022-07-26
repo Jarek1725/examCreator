@@ -37,7 +37,7 @@ public class Question {
     private Boolean isHidden = false;
 
     @Column(name = "points")
-    private Long points;
+    private Integer points;
 
     public Question() {
     }
@@ -88,19 +88,28 @@ public class Question {
         isHidden = hidden;
     }
 
-    public Long getPoints() {
-        return points;
-    }
+
 
     public Boolean getHidden() {
         return isHidden;
     }
 
-    public void setPoints(Long points) {
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
         this.points = points;
     }
 
     public void addAnswer(Answer answer){
         this.answers.add(answer);
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "value='" + value + '\'' +
+                '}';
     }
 }

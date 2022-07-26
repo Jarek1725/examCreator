@@ -4,27 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SelectedAnswers {
-    private Long examId;
-    private List<Long> selectedAnswers = new ArrayList<>();
+    private Long questionId;
+    private List<Long> selectedAnswersId = new ArrayList<>();
 
-    public SelectedAnswers(Long examId, List<Long> selectedAnswers) {
-        this.examId = examId;
-        this.selectedAnswers = selectedAnswers;
+    public SelectedAnswers(Long questionId, List<Long> selectedAnswersId) {
+        this.questionId = questionId;
+        this.selectedAnswersId = selectedAnswersId;
     }
 
-    public Long getExamId() {
-        return examId;
+    public Long getQuestionId() {
+        return questionId;
     }
 
-    public List<Long> getSelectedAnswers() {
-        return selectedAnswers;
-    }
-
-    @Override
-    public String toString() {
-        return "SelectedAnswers{" +
-                "examId=" + examId +
-                ", selectedAnswers=" + selectedAnswers +
-                '}';
+    public List<Long> getSelectedAnswersId() {
+        return selectedAnswersId;
     }
 }

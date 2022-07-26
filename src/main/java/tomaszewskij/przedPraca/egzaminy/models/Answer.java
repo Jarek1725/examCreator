@@ -83,4 +83,12 @@ public class Answer {
     public void setAttemptAnswers(List<AttemptAnswer> attemptAnswers) {
         this.attemptAnswers = attemptAnswers;
     }
+
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "value='" + value + '\'' +
+                ", isCorrect=" + isCorrect +
+                '}';
+    }
 }
