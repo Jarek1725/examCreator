@@ -32,7 +32,6 @@ public class QuestionService {
         question.setValue(questionInput.getValue());
         question.setPoints(questionInput.getPoints());
 
-
         questionRepository.save(question);
     }
 }

@@ -28,6 +28,11 @@ public class University {
         return exams;
     }
 
+    public University(String city, String name) {
+        this.city = city;
+        this.name = name;
+    }
+
     public void setExams(List<ExamUniversity> exams) {
         this.exams = exams;
     }

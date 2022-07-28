@@ -34,7 +34,7 @@ public class Exam {
     @JoinColumn(name = "exam_creator_id")
     private AppUser creator;
 
-    @OneToMany(mappedBy = "exam")
+    @OneToMany(mappedBy = "exam", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Question> questions = new ArrayList<>();
 
     @OneToMany(
@@ -224,7 +224,7 @@ public class Exam {
     }
 
     public int getHowManyQuestionsShow() {
-        return howManyQuestionsShow == null ? 0 :howManyQuestionsShow;
+        return howManyQuestionsShow == null ? 0 : howManyQuestionsShow;
     }
 
     public void setHowManyQuestionsShow(int howManyQuestionsShow) {

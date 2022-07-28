@@ -31,16 +31,19 @@ public class ExamService {
     }
 
 
-    public void createExam(String examTitle, String appUserPrivateToken, List<String> categories) {
+    public Exam createExam(String examTitle, String appUserPrivateToken, List<String> categories) {
         Exam entity = new Exam(examTitle);
         List<Category> categoriesEntities = categories.stream().map(categoryService::findByNameOrCreateNew).toList();
         entity.setPublicId(generateRandomString());
         entity.setCreator(appUserService.getAppUserByPrivateToken(appUserPrivateToken));
+        entity.setPercentToPass(50.0);
         entity.setColorValue(ThreadLocalRandom.current().nextInt(0, 6));
         categoriesEntities.forEach(category -> {
             entity.addCategory(new ExamCategory(entity, category));
         });
         examRepository.save(entity);
+
+        return entity;
     }
 
     public Exam getByPublicId(String publicId) {

@@ -13,12 +13,17 @@ public class ExamUniversity {
     @JoinColumn(name = "exam_id")
     private Exam exam;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "university_id")
     private University university;
 
 
     public ExamUniversity() {
+    }
+
+    public ExamUniversity(Exam exam, University university) {
+        this.exam = exam;
+        this.university = university;
     }
 
     public Exam getExam() {

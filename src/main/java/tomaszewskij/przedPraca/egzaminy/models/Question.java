@@ -42,10 +42,27 @@ public class Question {
     public Question() {
     }
 
+    public Question(String value, Integer points) {
+        this.value = value;
+        this.points = points;
+    }
+
+    public Question(String value, List<Answer> answers, Integer points) {
+        this.value = value;
+        this.answers = answers;
+        this.points = points;
+    }
+
     public Question(String value, List<Answer> answers, Exam exam) {
         this.value = value;
         this.answers = answers;
         this.exam = exam;
+    }
+
+    public Question(String value, Exam exam, Integer points) {
+        this.value = value;
+        this.exam = exam;
+        this.points = points;
     }
 
     public Question(String value) {
