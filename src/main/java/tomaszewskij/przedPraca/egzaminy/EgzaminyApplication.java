@@ -36,14 +36,14 @@ public class EgzaminyApplication {
             QuestionService questionService
     ) {
         return args -> {
-
             if (1 == 3) {
 
                 String appUserPrivateString = appUserService.createAppUser();
+                Exam exam = examService.createExam("Opus Magnum", appUserPrivateString, List.of("Programowanie"));
 
-                Question question1 = new Question("Wskaż poniżej poprawne definicje tablic", 1);
-                Question question2 = new Question("Czy poprawna jest następująca definicja?", 1);
-                Question question3 = new Question("Mamy tablicą:char tabl[10] = { 'ABCD' };  Czy poprawne są następujące instrukcje korzystające  z tej tablicy??", 2);
+                Question question1 = new Question("Wskaż poniżej poprawne definicje tablic", exam, 1);
+                Question question2 = new Question("Czy poprawna jest następująca definicja?", exam, 1);
+                Question question3 = new Question("Mamy tablicą:char tabl[10] = { 'ABCD' };  Czy poprawne są następujące instrukcje korzystające  z tej tablicy??", exam, 2);
 
                 List<Answer> answers1 = List.of(
                         new Answer("double wspolcz[5.6]", question1, false),
@@ -72,7 +72,6 @@ public class EgzaminyApplication {
                 question2.setAnswers(answers2);
                 question3.setAnswers(answers3);
 
-                Exam exam = examService.createExam("Opus Magnum", appUserPrivateString, List.of("Programowanie"));
 
                 University university = new University("Kraków", "Politechnika Krakowska");
 

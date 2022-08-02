@@ -4,6 +4,7 @@ type Query{
     exam(examPublicId:String):Exam
     exams(filter:ExamFilter, sortBy:String):[Exam]
     examAttempts(filter:ExamAttemptFilter):[ExamAttempts]
+    attemptResult(attemptId:Int):ExamAttempts
 }
 
 type Mutation{
@@ -13,7 +14,7 @@ type Mutation{
     addQuestionToExam(question:QuestionInput):Boolean
     addExamRating(value:Float, appUserPrivateToken:String, examId:Int):Boolean
     addExamAttempt(value:Int, appUserPrivateToken:String, examId:Int):Boolean
-    startAttempt(examPublicId:String, appUserPrivateToken:String):[Question]
+    startAttempt(examPublicId:String, appUserPrivateToken:String):StartAttempt
     endAttempt(selectedAnswers:[SelectedAnswers], attemptId:Int, appUserPrivateToken:String):Boolean
 }
 
@@ -89,6 +90,20 @@ type ExamAttempts{
     user:AppUser
     exam:Exam
     createDate:String
+    attemptQuestion:[AttemptQuestion]
+}
+
+type AttemptQuestion{
+    id:ID
+    examAttempts:ExamAttempts
+    question:Question
+    attemptAnswers:[AttemptAnswer]
+}
+
+type AttemptAnswer{
+    id:ID
+    attemptQuestion:AttemptQuestion
+    answer:Answer
 }
 
 input QuestionInput{
@@ -105,6 +120,13 @@ type University{
     city:String
 }
 
+type StartAttempt{
+    questions:[Question]
+    attemptId:Int
+}
+
+
+
 input ExamAttemptFilter{
     publicToken:String
     examId:Int
@@ -119,3 +141,4 @@ input SelectedAnswers{
     questionId:Int
     selectedAnswersId:[Int]
 }
+

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tomaszewskij.przedPraca.egzaminy.DTO.ExamAttemptFilter;
 import tomaszewskij.przedPraca.egzaminy.DTO.SelectedAnswers;
+import tomaszewskij.przedPraca.egzaminy.DTO.StartAttempt;
 import tomaszewskij.przedPraca.egzaminy.exceptions.NotFoundException;
 import tomaszewskij.przedPraca.egzaminy.models.*;
 import tomaszewskij.przedPraca.egzaminy.repositories.AttemptAnswerRepository;
@@ -36,7 +37,7 @@ public class ExamAttemptService {
         return examAttemptRepository.findAllFilterAndGroup(filter.getExamId(), filter.getPublicToken());
     }
 
-    public List<Question> startAttempt(String examPublicId, String appUserPrivateToken) {
+    public StartAttempt startAttempt(String examPublicId, String appUserPrivateToken) {
         Exam exam = examService.getByPublicId(examPublicId);
         int howManyQuestionsShow = exam.getHowManyQuestionsShow();
 
@@ -62,7 +63,9 @@ public class ExamAttemptService {
 
         examAttemptRepository.save(examAttempt);
 
-        return questions;
+        StartAttempt startAttempt = new StartAttempt(questions, examAttempt.getId());
+
+        return startAttempt;
     }
 
     public List<Question> generateRandomQuestions(Exam exam, int howManyQuestions) {
@@ -122,5 +125,15 @@ public class ExamAttemptService {
         correctAnswers.sort(Comparator.comparing(Answer::getId));
 
         return correctAnswers.equals(userAnswers);
+    }
+
+    public ExamAttempts attemptResult(Long attemptId) {
+        ExamAttempts examAttempts = examAttemptRepository.findById(attemptId).orElseThrow(
+                () -> new NotFoundException("Not found attempt with id: " + attemptId, "Exam attempt"));
+
+        examAttempts.getAttemptQuestion().forEach(question->{
+        });
+
+        return examAttempts;
     }
 }
