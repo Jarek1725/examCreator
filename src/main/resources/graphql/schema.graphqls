@@ -9,7 +9,7 @@ type Query{
 
 type Mutation{
     createAppUser:String
-    createExam(examTitle:String, appUserPrivateToken:String, categories:[String]):Boolean
+    createExam(examTitle:String, appUserPrivateToken:String, categories:[String], universityId:Int):Boolean
     createCategory(categoryName:String):Boolean
     addQuestionToExam(question:QuestionInput):Boolean
     addExamRating(value:Float, appUserPrivateToken:String, examId:Int):Boolean

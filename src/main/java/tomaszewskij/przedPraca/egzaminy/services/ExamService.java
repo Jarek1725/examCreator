@@ -31,7 +31,7 @@ public class ExamService {
     }
 
 
-    public Exam createExam(String examTitle, String appUserPrivateToken, List<String> categories) {
+    public Exam createExam(String examTitle, String appUserPrivateToken, List<String> categories, Long universityId) {
         Exam entity = new Exam(examTitle);
         List<Category> categoriesEntities = categories.stream().map(categoryService::findByNameOrCreateNew).toList();
         entity.setPublicId(generateRandomString());
@@ -41,6 +41,13 @@ public class ExamService {
         categoriesEntities.forEach(category -> {
             entity.addCategory(new ExamCategory(entity, category));
         });
+
+        University university = new University("Test1", "Tets2");
+        ExamUniversity examUniversity = new ExamUniversity();
+        examUniversity.setExam(entity);
+        examUniversity.setUniversity(university);
+        entity.setUniversities(List.of(examUniversity));
+
         examRepository.save(entity);
 
         return entity;

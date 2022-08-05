@@ -31,8 +31,8 @@ public class ExamController {
     }
 
     @MutationMapping
-    public boolean createExam(@Argument String examTitle, @Argument String appUserPrivateToken, @Argument List<String> categories){
-        examService.createExam(examTitle, appUserPrivateToken, categories);
+    public boolean createExam(@Argument String examTitle, @Argument String appUserPrivateToken, @Argument List<String> categories, @Argument Long universityId){
+        examService.createExam(examTitle, appUserPrivateToken, categories, universityId);
         return true;
     }
 

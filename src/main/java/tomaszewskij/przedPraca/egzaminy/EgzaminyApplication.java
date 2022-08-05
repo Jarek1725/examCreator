@@ -39,7 +39,7 @@ public class EgzaminyApplication {
             if (1 == 3) {
 
                 String appUserPrivateString = appUserService.createAppUser();
-                Exam exam = examService.createExam("Opus Magnum", appUserPrivateString, List.of("Programowanie"));
+                Exam exam = examService.createExam("Opus Magnum", appUserPrivateString, List.of("Programowanie"), 1L);
 
                 Question question1 = new Question("Wskaż poniżej poprawne definicje tablic", exam, 1);
                 Question question2 = new Question("Czy poprawna jest następująca definicja?", exam, 1);
