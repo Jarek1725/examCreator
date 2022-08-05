@@ -59,7 +59,7 @@ type Answer{
     id:ID
     value:String
     question:Question
-#    isCorrect:Boolean
+    isCorrect:Boolean
 }
 
 input AnswerInput{
@@ -81,7 +81,7 @@ type ExamRating{
     id:ID
     appUser:AppUser
     exam:Exam
-    value:Int
+    value:Float
 }
 
 type ExamAttempts{

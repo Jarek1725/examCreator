@@ -95,4 +95,8 @@ public class ExamService {
 
         examRepository.save(exam);
     }
+
+    public Double getExamRatingByIdAndAppUser(Long id, AppUser appUser){
+        return examRepository.getExamByIdAndCreator(id, appUser);
+    }
 }

@@ -131,8 +131,10 @@ public class ExamAttemptService {
         ExamAttempts examAttempts = examAttemptRepository.findById(attemptId).orElseThrow(
                 () -> new NotFoundException("Not found attempt with id: " + attemptId, "Exam attempt"));
 
-        examAttempts.getAttemptQuestion().forEach(question->{
-        });
+        Exam exam = examService.getById(examAttempts.getExam().getId());
+
+        ExamRating examRating = exam.getExamRatings().stream().filter(e -> e.getAppUser().getId().equals(examAttempts.getUser().getId())).findFirst().get();
+        examAttempts.getExam().setExamRatings(List.of(examRating));
 
         return examAttempts;
     }

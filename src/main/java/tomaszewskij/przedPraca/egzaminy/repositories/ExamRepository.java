@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import tomaszewskij.przedPraca.egzaminy.models.AppUser;
 import tomaszewskij.przedPraca.egzaminy.models.Exam;
 
 import java.util.List;
@@ -27,4 +28,6 @@ public interface ExamRepository extends JpaRepository<Exam, Long> {
     List<Exam> findAllExamsFilterAndSorted(String category, String school, String sortBy);
 
     Optional<Exam> findByPublicId(String publicId);
+
+    Double getExamByIdAndCreator(Long id, AppUser appUser);
 }
