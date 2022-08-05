@@ -133,7 +133,7 @@ public class ExamAttemptService {
 
         Exam exam = examService.getById(examAttempts.getExam().getId());
 
-        ExamRating examRating = exam.getExamRatings().stream().filter(e -> e.getAppUser().getId().equals(examAttempts.getUser().getId())).findFirst().get();
+        ExamRating examRating = exam.getExamRatings().stream().filter(e -> e.getAppUser().getId().equals(examAttempts.getUser().getId())).findFirst().orElseGet(ExamRating::new);
         examAttempts.getExam().setExamRatings(List.of(examRating));
 
         return examAttempts;
