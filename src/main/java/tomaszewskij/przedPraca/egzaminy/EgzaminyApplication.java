@@ -36,7 +36,7 @@ public class EgzaminyApplication {
             QuestionService questionService
     ) {
         return args -> {
-            if (1 == 1) {
+            if (1 == 3) {
 
                 String appUserPrivateString = appUserService.createAppUser();
                 Exam exam = examService.createExam("Opus Magnum", appUserPrivateString, List.of("Programowanie"));
